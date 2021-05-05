@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ProyectoFinalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Departamentos">
+          <Key>
+            <PropertyRef Name="IdDepa" />
+          </Key>
+          <Property Name="IdDepa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreDepa" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Siglas" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="año" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DocumentosG">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Año" Type="int" Nullable="false" />
+          <Property Name="Departamento_Origen" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Departamento_Destino" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Secuencia" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="idDepa" Type="int" Nullable="false" />
+          <Property Name="idUser" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Correo" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Departamento" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Cargo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Apellido" Type="varchar" MaxLength="100" />
+          <Property Name="Edad" Type="int" Nullable="false" />
+          <Property Name="IdDepa" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_DocumentosG_Departamentos">
+          <End Role="Departamentos" Type="Self.Departamentos" Multiplicity="1" />
+          <End Role="DocumentosG" Type="Self.DocumentosG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamentos">
+              <PropertyRef Name="IdDepa" />
+            </Principal>
+            <Dependent Role="DocumentosG">
+              <PropertyRef Name="idDepa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocumentosG_Usuarios">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="DocumentosG" Type="Self.DocumentosG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DocumentosG">
+              <PropertyRef Name="idUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuarios_Departamentos">
+          <End Role="Departamentos" Type="Self.Departamentos" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamentos">
+              <PropertyRef Name="IdDepa" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="IdDepa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProyectoFinalModelStoreContainer">
+          <EntitySet Name="Departamentos" EntityType="Self.Departamentos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DocumentosG" EntityType="Self.DocumentosG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_DocumentosG_Departamentos" Association="Self.FK_DocumentosG_Departamentos">
+            <End Role="Departamentos" EntitySet="Departamentos" />
+            <End Role="DocumentosG" EntitySet="DocumentosG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocumentosG_Usuarios" Association="Self.FK_DocumentosG_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="DocumentosG" EntitySet="DocumentosG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_Departamentos" Association="Self.FK_Usuarios_Departamentos">
+            <End Role="Departamentos" EntitySet="Departamentos" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProyectoFinalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Departamentos">
+          <Key>
+            <PropertyRef Name="IdDepa" />
+          </Key>
+          <Property Name="IdDepa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreDepa" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Siglas" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="año" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DocumentosG" Relationship="Self.FK_DocumentosG_Departamentos" FromRole="Departamentos" ToRole="DocumentosG" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuarios_Departamentos" FromRole="Departamentos" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="DocumentosG">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Año" Type="Int32" Nullable="false" />
+          <Property Name="Departamento_Origen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Departamento_Destino" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Secuencia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idDepa" Type="Int32" Nullable="false" />
+          <Property Name="idUser" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Departamentos" Relationship="Self.FK_DocumentosG_Departamentos" FromRole="DocumentosG" ToRole="Departamentos" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_DocumentosG_Usuarios" FromRole="DocumentosG" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Correo" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Departamento" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cargo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Edad" Type="Int32" Nullable="false" />
+          <Property Name="IdDepa" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Departamentos" Relationship="Self.FK_Usuarios_Departamentos" FromRole="Usuarios" ToRole="Departamentos" />
+          <NavigationProperty Name="DocumentosG" Relationship="Self.FK_DocumentosG_Usuarios" FromRole="Usuarios" ToRole="DocumentosG" />
+        </EntityType>
+        <Association Name="FK_DocumentosG_Departamentos">
+          <End Role="Departamentos" Type="Self.Departamentos" Multiplicity="1" />
+          <End Role="DocumentosG" Type="Self.DocumentosG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamentos">
+              <PropertyRef Name="IdDepa" />
+            </Principal>
+            <Dependent Role="DocumentosG">
+              <PropertyRef Name="idDepa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuarios_Departamentos">
+          <End Role="Departamentos" Type="Self.Departamentos" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamentos">
+              <PropertyRef Name="IdDepa" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="IdDepa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocumentosG_Usuarios">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="DocumentosG" Type="Self.DocumentosG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DocumentosG">
+              <PropertyRef Name="idUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProyectoFinalEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Departamentos" EntityType="Self.Departamentos" />
+          <EntitySet Name="DocumentosG" EntityType="Self.DocumentosG" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+          <AssociationSet Name="FK_DocumentosG_Departamentos" Association="Self.FK_DocumentosG_Departamentos">
+            <End Role="Departamentos" EntitySet="Departamentos" />
+            <End Role="DocumentosG" EntitySet="DocumentosG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_Departamentos" Association="Self.FK_Usuarios_Departamentos">
+            <End Role="Departamentos" EntitySet="Departamentos" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocumentosG_Usuarios" Association="Self.FK_DocumentosG_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="DocumentosG" EntitySet="DocumentosG" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ProyectoFinalModelStoreContainer" CdmEntityContainer="ProyectoFinalEntities">
+          <EntitySetMapping Name="Departamentos">
+            <EntityTypeMapping TypeName="ProyectoFinalModel.Departamentos">
+              <MappingFragment StoreEntitySet="Departamentos">
+                <ScalarProperty Name="IdDepa" ColumnName="IdDepa" />
+                <ScalarProperty Name="NombreDepa" ColumnName="NombreDepa" />
+                <ScalarProperty Name="Siglas" ColumnName="Siglas" />
+                <ScalarProperty Name="año" ColumnName="año" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DocumentosG">
+            <EntityTypeMapping TypeName="ProyectoFinalModel.DocumentosG">
+              <MappingFragment StoreEntitySet="DocumentosG">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Año" ColumnName="Año" />
+                <ScalarProperty Name="Departamento_Origen" ColumnName="Departamento_Origen" />
+                <ScalarProperty Name="Departamento_Destino" ColumnName="Departamento_Destino" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="idDepa" ColumnName="idDepa" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="ProyectoFinalModel.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Departamento" ColumnName="Departamento" />
+                <ScalarProperty Name="Cargo" ColumnName="Cargo" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Edad" ColumnName="Edad" />
+                <ScalarProperty Name="IdDepa" ColumnName="IdDepa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

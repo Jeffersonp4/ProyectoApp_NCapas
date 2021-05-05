@@ -1,0 +1,94 @@
+﻿@model IEnumerable<Entidad.Usuarios>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="prueba"> Lista de Usuarios</h2>
+
+
+<p>
+    <a class="btn btn-primary" href="@Url.Action("Crear", "Usuario")"><i class="glyphicon glyphicon-plus"> </i> Crear Nuevo Ussuario</a>
+</p>
+
+
+<table class="table" id="datatable">
+
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Correo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Departamento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cargo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Apellido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Edad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdDepa)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Correo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Departamento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cargo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Apellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Edad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdDepa)
+                </td>
+                <td>
+                    <a class="btn btn-primary btn-xs" title="Editar" href="@Url.Action("Editar","Usuario", new {id = item.id })">
+                        <i class="glyphicon glyphicon-edit "></i>
+                    </a>
+                    <a class="btn btn-info btn-xs" title="Detalles" href="@Url.Action("ConsigueUsuario","Usuario", new {id = item.id })">
+                        <i class="glyphicon glyphicon-info-sign "></i>
+                    </a>
+                    <a class="btn btn-danger btn-xs" title="Eliminar" href="@Url.Action("Eliminar","Usuario", new {id = item.id })">
+                        <i class="glyphicon glyphicon-trash "></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+
+
+
+</table>
+
+@section scripts{
+    <script>
+        $('#datatable').DataTable();
+    </script>
+
+}

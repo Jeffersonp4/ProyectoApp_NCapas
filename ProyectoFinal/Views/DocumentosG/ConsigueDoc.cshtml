@@ -1,0 +1,22 @@
+﻿@model Entidad.DocumentoBien
+
+@{
+    ViewBag.Title = "ConsigueDoc";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Secuencia_Documento_Generado</h2>
+
+<div>
+    <hr />
+    <dl class="text-center"  class="dl-horizontal">
+
+        <dd class="text-info">
+            @Model.Año-@Model.Nombres_O-@Model.NombreDepa-@Model.Secuencia
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Regresar", "Index")
+</p>

@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ProyectoFinalModelStoreContainer" CdmEntityContainer="ProyectoFinalEntitiesDatos">
+    <EntitySetMapping Name="Departamentos">
+      <EntityTypeMapping TypeName="ProyectoFinalModel.Departamentos">
+        <MappingFragment StoreEntitySet="Departamentos">
+          <ScalarProperty Name="IdDepa" ColumnName="IdDepa" />
+          <ScalarProperty Name="NombreDepa" ColumnName="NombreDepa" />
+          <ScalarProperty Name="Siglas" ColumnName="Siglas" />
+          <ScalarProperty Name="año" ColumnName="año" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuarios">
+      <EntityTypeMapping TypeName="ProyectoFinalModel.Usuarios">
+        <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Correo" ColumnName="Correo" />
+          <ScalarProperty Name="Departamento" ColumnName="Departamento" />
+          <ScalarProperty Name="Cargo" ColumnName="Cargo" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+          <ScalarProperty Name="Edad" ColumnName="Edad" />
+          <ScalarProperty Name="IdDepa" ColumnName="IdDepa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DocumentosG">
+      <EntityTypeMapping TypeName="ProyectoFinalModel.DocumentosG">
+        <MappingFragment StoreEntitySet="DocumentosG">
+          <ScalarProperty Name="idUser" ColumnName="idUser" />
+          <ScalarProperty Name="idDepa" ColumnName="idDepa" />
+          <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+          <ScalarProperty Name="Departamento_Destino" ColumnName="Departamento_Destino" />
+          <ScalarProperty Name="Departamento_Origen" ColumnName="Departamento_Origen" />
+          <ScalarProperty Name="Año" ColumnName="Año" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,72 @@
+﻿@model Entidad.DocumentosG
+
+@{
+    ViewBag.Title = "Eliminar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Eliminar</h2>
+
+<h3>Estas Seguro que quieres Eliminar Este Documento?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Año)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Año)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Departamento_Origen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Departamento_Origen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Departamento_Destino)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Departamento_Destino)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Secuencia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Secuencia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idDepa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idDepa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idUser)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idUser)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-primary" /> |
+            @Html.ActionLink("Regresar", "Index")
+        </div>
+    }
+</div>
